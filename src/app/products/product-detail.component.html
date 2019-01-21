@@ -1,3 +1,45 @@
 <div class="card">
-  <div class="card-header" *ngIf="product">{{ pageTitle + ': ' + product.name }}</div>
+  <div class="card-header" *ngIf="product">
+    {{ pageTitle }}: {{ product.name }}
+  </div>
+  <div class="card-body">
+    <div class="container" *ngIf="product">
+      <div class="row">
+        <div class="col-sm">
+          <div class="row">
+            <div class="col-sm">Name:</div>
+            <div class="col-sm-8">{{ product.name }}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm">Code:</div>
+            <div class="col-sm-8">{{ product.code }}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm">Description:</div>
+            <div class="col-sm-8">{{ product.description }}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm">Availability:</div>
+            <div class="col-sm-8">{{ product.releaseDate }}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm">Price:</div>
+            <div class="col-sm-8">{{product.price | currency: 'USD': 'symbol': '1.2-2'}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm">5 Star Rating:</div>
+            <div class="col-sm-8"><app-star [rating]="product.starRating"></app-star></div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <img [src]="product.imageUrl">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-outline-secondary" (click)="onBack()">
+      <i class="fa fa-chevron-left" style="width: 80px"></i>Back
+    </button>
+  </div>
 </div>

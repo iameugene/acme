@@ -5,14 +5,21 @@ import { Observable, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProductsService {
-  productsUrl = 'api/products'
+  productsUrl = 'api/'
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.productsUrl).pipe(catchError(this.handleError))
+    return this.http
+      .get<IProduct[]>(this.productsUrl + 'products')
+      .pipe(catchError(this.handleError))
+  }
+  getProductById(id: number): Observable<IProduct> {
+    return this.http
+      .get<IProduct>(`${this.productsUrl + 'products'}/${id}`)
+      .pipe(catchError(this.handleError))
   }
 
   private handleError(err: HttpErrorResponse) {
